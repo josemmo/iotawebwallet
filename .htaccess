@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Special files
+RewriteRule ^css/app\.css$ proxy.php?type=css [QSA,L]
+RewriteRule ^js/app\.js$   proxy.php?type=js  [QSA,L]
+
+# Error pages
+ErrorDocument 404 "<meta http-equiv='refresh' content='1; url=/'><p>Redirecting...</p>"

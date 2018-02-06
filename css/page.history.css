@@ -1,0 +1,39 @@
+section[data-page="history"] .dataTables_wrapper {
+  margin: 0;
+  padding: 0;
+}
+section[data-page="history"] .dataTables_scroll {
+  margin: 0 -15px;
+}
+section[data-page="history"] table {
+  width: 100% !important;
+  min-width: 750px;
+  padding: 0 15px;
+  table-layout: fixed;
+  border-spacing: 0;
+  border-collapse: collapse;
+  font-size: 0.8em;
+}
+
+section[data-page="history"] table td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+section[data-page="history"] table th {
+  width: auto !important;
+}
+
+section[data-page="history"] table tr > *:first-child,
+section[data-page="history"] table tr > *:nth-child(2) {
+  width: 28px !important;
+  text-align: center;
+}
+section[data-page="history"] table tr > *:last-child {
+  width: 36px !important;
+  text-align: right;
+}
+
+section[data-page="history"] table h {
+  display: none;
+}

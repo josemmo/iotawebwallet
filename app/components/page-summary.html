@@ -1,0 +1,46 @@
+<section data-page="summary">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <!-- BALANCE -->
+        <div class="jumbotron mb-2 text-center">
+          <h3 class="display-3 mb-1 max-iotas"></h3>
+          <h4 class="text-muted lead unconfirmed-iotas"></h4>
+          <h5 class="text-muted mt-3 wallet-rate"></h5>
+        </div>
+
+        <!-- PRICE -->
+        <div class="card mb-2">
+          <div class="card-body p-0">
+            <div class="row p-3">
+              <div class="col">
+                <h3 class="card-title"><strong class="iota-price"></strong><small class="text-muted"> per MIOTA</small></h3>
+                <h6 class="card-subtitle mb-3 text-muted">
+                  <span class="iota-diff"></span> (<span class="iota-diff-percent"></span> %) since last week
+                </h6>
+              </div>
+              <div class="col-auto">
+                <button type="button" class="btn btn-primary btn-refresh">Refresh</button>
+              </div>
+            </div>
+            <div class="price-chart-container"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <!-- ADDRESSES -->
+        <div class="card mb-2">
+          <div class="card-body p-0">
+            <div class="row p-3">
+              <div class="col">
+                <h3 class="card-title">Wallet addresses</h3>
+                <h6 class="card-subtitle mb-3 text-muted">Addresses assigned to this wallet</h6>
+                <div class="addresses-container"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

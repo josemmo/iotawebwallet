@@ -1,5 +1,5 @@
 <?php
-define('APP_VERSION', '1.0.2');
+define('APP_VERSION', '1.0.3');
 
 define('DEP_IOTA_VERSION', '0.4.7');
 define('DEP_JQUERY_VERSION', '3.3.1');

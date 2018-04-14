@@ -1,5 +1,15 @@
 (function() {
 
+  var TX_STATUS = {
+    CONFIRMED: 1,
+    PENDING: 2,
+    REATTACHED: 3
+  };
+  var TX_TYPE = {
+    SENT: 1,
+    RECEIVED: 2
+  };
+
   var iota = null;
   var useFallbackNode = false;
   var SEED = null;
@@ -162,29 +172,72 @@
 
 
   /**
+   * Get parsed transactions
+   * @return {object} data Raw iota.lib.js account data
+   * @return {object}      Parsed transactions array
+   */
+  function getParsedTransactions(data) {
+    var res = [];
+
+    // Category transfers
+    var transfers = iota.utils.categorizeTransfers(data.transfers, data.addresses);
+    var confirmedBundles = [];
+    for (var type in transfers) {
+      transfers[type].forEach(function(bundle) {
+        bundle.forEach(function(tx) {
+          // Check transaction belongs to user
+          if ((type == 'received') && (data.addresses.indexOf(tx.address) < 0)) return;
+
+          // Include new attributes
+          tx.type = (type == 'received') ? TX_TYPE.RECEIVED : TX_TYPE.SENT;
+          if (tx.persistence) {
+            if (confirmedBundles.indexOf(tx.bundle) < 0) confirmedBundles.push(tx.bundle);
+            tx.status = TX_STATUS.CONFIRMED;
+          } else if (confirmedBundles.indexOf(tx.bundle) > -1) {
+            tx.status = TX_STATUS.REATTACHED;
+          } else {
+            tx.status = TX_STATUS.PENDING;
+          }
+
+          // Add transaction to response
+          res.push(tx);
+        });
+      });
+    }
+
+    return res;
+  }
+
+
+  /**
    * Parse account data
    * @param {object} data Account data
    */
   function parseAccountData(data) {
+    var transactions = getParsedTransactions(data);
+
     // Update balance
     $('.max-iotas').html(formatIotas(data.balance)).data('value', data.balance);
 
     // Update unconfirmed balance
-    var unconfirmed = 0;
-    data.transfers.forEach(function(bundle) {
-      bundle.forEach(function(tx) {
-        if ((data.addresses.indexOf(tx.address) > -1) && !tx.persistence) {
-          unconfirmed += tx.value;
+    var unconfirmedTotal = 0;
+    var unconfirmedAddrs = {};
+    transactions.forEach(function(tx) {
+      if ((tx.status == TX_STATUS.PENDING) && (tx.value !== 0)) {
+        unconfirmedTotal += tx.value;
+        if (typeof unconfirmedAddrs[tx.address] == 'undefined') {
+          unconfirmedAddrs[tx.address] = 0;
         }
-      });
+        unconfirmedAddrs[tx.address] += tx.value;
+      }
     });
     var $unconfirmed = $('.unconfirmed-iotas');
-    if (unconfirmed == 0) {
+    if (unconfirmedTotal == 0) {
       $unconfirmed.hide();
     } else {
       $unconfirmed.html(
-        (unconfirmed < 0 ? '-' : '+') +
-        ' <strong>' + formatIotas(unconfirmed) + '</strong> unconfirmed'
+        (unconfirmedTotal < 0 ? '-' : '+') +
+        ' <strong>' + formatIotas(unconfirmedTotal) + '</strong> unconfirmed'
       ).show();
     }
 
@@ -205,9 +258,14 @@
             break;
           }
         }
+        var unconfirmedBalance = '';
+        if (typeof unconfirmedAddrs[addr] !== 'undefined') {
+          unconfirmedBalance = ' <span class="text-muted">(' +
+            formatIotas(unconfirmedAddrs[addr]) + ')</span>';
+        }
         aHTML += '<tr>' +
             '<td><a href="' + window.SETTINGS.explorer + 'address/' + addr + '" target="_blank">' + addr + '</a></td>' +
-            '<td>' + formatIotas(balance) + '</td>' +
+            '<td>' + formatIotas(balance) + unconfirmedBalance + '</td>' +
           '</tr>';
       });
       aHTML += '</tbody></table>';
@@ -220,33 +278,33 @@
     var $container = $('section[data-page="history"] .container');
     if (data.transfers.length > 0) {
       var dataSet = [];
-      var transfers = iota.utils.categorizeTransfers(data.transfers, data.addresses);
-      for (var type in transfers) {
-        transfers[type].forEach(function(bundle) {
-          bundle.forEach(function(tx) {
-            // Check transaction belongs to user
-            if ((type == 'received') && (data.addresses.indexOf(tx.address) < 0)) return;
-
-            // Add transaction to table
-            var typeHTML = (type == 'sent') ?
-              '<h>O</h><img width="15" src="images/outgoing.svg" alt="🔺" title="Outgoing">' :
-              '<h>I</h><img width="15" src="images/incoming.svg" alt="🔻" title="Incoming">';
-            var confirmedHTML = tx.persistence ?
-              '<h>C</h><img width="15" src="images/confirmed.svg" alt="✔️" title="Confirmed">' :
-              '<h>P</h><img width="15" src="images/pending.svg" alt="💬" title="Pending">';
-            dataSet.push([
-              typeHTML,
-              confirmedHTML,
-              '<h>' + tx.attachmentTimestamp + '</h>' + window.formatDate(tx.attachmentTimestamp),
-              '<a href="' + window.SETTINGS.explorer + 'bundle/' + tx.bundle + '" target="_blank">' + tx.bundle + '</a>',
-              '<a href="' + window.SETTINGS.explorer + 'address/' + tx.address + '" target="_blank">' + tx.address + '</a>',
-              '<a href="' + window.SETTINGS.explorer + 'transaction/' + tx.hash + '" target="_blank">' + tx.hash + '</a>',
-              '<a href="' + window.SETTINGS.explorer + 'tag/' + tx.tag + '" target="_blank">' + tx.tag.replace(/9+$/g, '') + '</a>',
-              '<h>' + tx.value + '</h>' + formatIotas(tx.value)
-            ]);
-          });
-        });
-      }
+      transactions.forEach(function(tx) {
+        var typeHTML = (tx.type == TX_TYPE.SENT) ?
+          '<h>O</h><img width="15" src="images/outgoing.svg" alt="🔺" title="Outgoing">' :
+          '<h>I</h><img width="15" src="images/incoming.svg" alt="🔻" title="Incoming">';
+        var statusHTML = '';
+        switch (tx.status) {
+          case TX_STATUS.CONFIRMED:
+            statusHTML = '<h>C</h><img width="15" src="images/confirmed.svg" alt="✔️" title="Confirmed">';
+            break;
+          case TX_STATUS.PENDING:
+            statusHTML = '<h>P</h><img width="15" src="images/pending.svg" alt="💬" title="Pending">';
+            break;
+          case TX_STATUS.REATTACHED:
+            statusHTML = '<h>R</h><img width="15" src="images/reattached.svg" alt="🔁" title="Reattachment confirmed">';
+            break;
+        }
+        dataSet.push([
+          typeHTML,
+          statusHTML,
+          '<h>' + tx.attachmentTimestamp + '</h>' + window.formatDate(tx.attachmentTimestamp),
+          '<a href="' + window.SETTINGS.explorer + 'bundle/' + tx.bundle + '" target="_blank">' + tx.bundle + '</a>',
+          '<a href="' + window.SETTINGS.explorer + 'address/' + tx.address + '" target="_blank">' + tx.address + '</a>',
+          '<a href="' + window.SETTINGS.explorer + 'transaction/' + tx.hash + '" target="_blank">' + tx.hash + '</a>',
+          '<a href="' + window.SETTINGS.explorer + 'tag/' + tx.tag + '" target="_blank">' + tx.tag.replace(/9+$/g, '') + '</a>',
+          '<h>' + tx.value + '</h>' + formatIotas(tx.value)
+        ]);
+      });
       $container.html('<table class="table table-striped"></table>');
       $container.find('table').DataTable({
         scrollX: true,

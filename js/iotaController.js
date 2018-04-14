@@ -291,7 +291,7 @@
             statusHTML = '<h>P</h><img width="15" src="images/pending.svg" alt="💬" title="Pending">';
             break;
           case TX_STATUS.REATTACHED:
-            statusHTML = '<h>R</h><img width="15" src="images/reattached.svg" alt="✔️" title="Reattachment confirmed">';
+            statusHTML = '<h>R</h><img width="15" src="images/reattached.svg" alt="🔁" title="Reattachment confirmed">';
             break;
         }
         dataSet.push([

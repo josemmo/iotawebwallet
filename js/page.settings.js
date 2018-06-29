@@ -11,8 +11,8 @@
     date: 'YYYY-MM-DD',
     time: 'H:mm',
     explorer: 'https://thetangle.org/',
-    main_node: 'https://iotanode.us:443',
-    fallback_node: ''
+    main_node: 'https://nodes.iota.fm:443',
+    fallback_node: 'https://durian.iotasalad.org:14265'
   };
   var savedSettings = localStorage.getItem(_ls_settings_key);
   if (savedSettings !== null) {

@@ -4,6 +4,10 @@
   var $page = $('section[data-page="settings"]');
 
   /* INITIALIZE APP SETTINGS */
+  var DEFAULT_NODES = {
+    main: 'https://nodes.iota.fm:443',
+    fallback: 'https://pool.iota.dance:443'
+  }
   window.SETTINGS = {
     decimals: '.',
     thousands: ',',
@@ -11,8 +15,7 @@
     date: 'YYYY-MM-DD',
     time: 'H:mm',
     explorer: 'https://thetangle.org/',
-    main_node: 'https://nodes.iota.fm:443',
-    fallback_node: 'https://durian.iotasalad.org:14265'
+    auto_nodes: true
   };
   var savedSettings = localStorage.getItem(_ls_settings_key);
   if (savedSettings !== null) {
@@ -20,6 +23,12 @@
     for (var property in savedSettings) {
       window.SETTINGS[property] = savedSettings[property];
     }
+  }
+
+  // Force nodes in auto mode
+  if (window.SETTINGS.auto_nodes) {
+    window.SETTINGS.main_node = DEFAULT_NODES.main;
+    window.SETTINGS.fallback_node = DEFAULT_NODES.fallback;
   }
 
 
@@ -51,6 +60,36 @@
     localStorage.setItem(_ls_settings_key, JSON.stringify(window.SETTINGS));
     window.location.reload();
   });
+
+
+  /* NODE SETTINGS */
+  var $nodes = $page.find('[data-section="nodes"]');
+  var $nodesBtn = $nodes.find('.btn-nodes-switch');
+
+  /**
+   * Toggle auto mode
+   * @param {boolean} enabled Enable or disable auto mode
+   */
+  function toggleAutoMode(enabled) {
+    var $msg = $nodes.find('.auto-mode-msg');
+    if (enabled) {
+      $msg.show();
+    } else {
+      $msg.hide();
+    }
+    var btnText = $nodesBtn.data(enabled ? 'txtDisable' : 'txtEnable');
+    $nodesBtn.text(btnText);
+    $nodes.find('input[type="text"]').prop('readonly', enabled);
+    window.SETTINGS.auto_nodes = enabled;
+  }
+
+  // Listen to switch button click
+  $nodesBtn.click(function() {
+    toggleAutoMode(!window.SETTINGS.auto_nodes);
+  });
+
+  // Load current type of settings
+  toggleAutoMode(window.SETTINGS.auto_nodes);
 
 
   /* DELETE ALL EVENT */

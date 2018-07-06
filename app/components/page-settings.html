@@ -50,6 +50,7 @@
           <div class="card-body">
             <h3 class="card-title">IOTA nodes</h3>
             <h6 class="card-subtitle mb-3 text-muted">Change the IOTA full nodes used to connect to The Tangle</h6>
+            <div class="alert alert-info auto-mode-msg"><strong>Auto mode</strong> is enabled. Nodes will be managed by the app.</div>
             <form>
               <div class="form-group">
                 <label>Main Node URL</label>
@@ -62,7 +63,14 @@
                 <small class="form-text text-muted">The one to be used when the main node fails</small>
               </div>
             </form>
-            <button type="button" class="btn btn-outline-secondary btn-save">Save and restart</button>
+            <div class="row">
+              <div class="col-md mb-2 mb-lg-0">
+                <button type="button" class="btn btn-outline-secondary btn-save">Save and restart</button>
+              </div>
+              <div class="col-md-auto">
+                <button type="button" class="btn btn-outline-info btn-nodes-switch" data-txt-enable="Enable auto nodes" data-txt-disable="Disable auto nodes"></button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -73,7 +81,7 @@
             <h6 class="card-subtitle mb-3 text-muted">Manage locally-stored seeds for this device</h6>
             <div class="wallet-list my-4"></div>
             <div class="row">
-              <div class="col-md mb-2 mb-md-0">
+              <div class="col-md mb-2 mb-lg-0">
                 <button type="button" class="btn btn-outline-primary btn-new-wallet">Create new wallet</button>
               </div>
               <div class="col-md-auto">

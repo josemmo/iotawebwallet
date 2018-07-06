@@ -179,9 +179,18 @@
   function getParsedTransactions(data) {
     var res = [];
 
+    // Get confirmed bundles
+    var confirmedBundles = [];
+    data.transfers.forEach(function(bundle) {
+      bundle.forEach(function(tx) {
+        if (tx.persistence && confirmedBundles.indexOf(tx.bundle) < 0) {
+          confirmedBundles.push(tx.bundle);
+        }
+      });
+    });
+
     // Category transfers
     var transfers = iota.utils.categorizeTransfers(data.transfers, data.addresses);
-    var confirmedBundles = [];
     for (var type in transfers) {
       transfers[type].forEach(function(bundle) {
         bundle.forEach(function(tx) {
@@ -191,7 +200,6 @@
           // Include new attributes
           tx.type = (type == 'received') ? TX_TYPE.RECEIVED : TX_TYPE.SENT;
           if (tx.persistence) {
-            if (confirmedBundles.indexOf(tx.bundle) < 0) confirmedBundles.push(tx.bundle);
             tx.status = TX_STATUS.CONFIRMED;
           } else if (confirmedBundles.indexOf(tx.bundle) > -1) {
             tx.status = TX_STATUS.REATTACHED;

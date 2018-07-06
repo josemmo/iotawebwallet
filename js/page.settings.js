@@ -7,7 +7,7 @@
   var DEFAULT_NODES = {
     main: 'https://nodes.iota.fm:443',
     fallback: 'https://pool.iota.dance:443'
-  }
+  };
   window.SETTINGS = {
     decimals: '.',
     thousands: ',',

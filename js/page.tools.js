@@ -47,6 +47,20 @@
   });
 
 
+  /* CONVERT TRYTES */
+  var iotaUtils = (new IOTA()).utils;
+  var $convertTrytes = $page.find('[data-section="convert-trytes"]');
+  $convertTrytes.find('textarea').keyup(function(e) {
+    var value = this.value;
+    var target = e.target.getAttribute('name');
+    if (target == 'ascii') {
+      $convertTrytes.find('[name="trytes"]').val(iotaUtils.toTrytes(value));
+    } else {
+      $convertTrytes.find('[name="ascii"]').val(iotaUtils.fromTrytes(value));
+    }
+  });
+
+
   /* ON PAGE LOAD */
   $page.on('pagination:load', function(e, section, transaction) {
     $(this).find('input').removeClass('is-invalid');

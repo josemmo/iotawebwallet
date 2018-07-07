@@ -457,7 +457,6 @@
         scales: {
           xAxes: [{
             display: false,
-            type: 'time',
             ticks: {source: 'labels'},
             gridLines: {display: false}
           }],

@@ -3,6 +3,13 @@ body, input, select, textarea {
   font-family: 'Lato', sans-serif;
   font-weight: 400;
 }
+.custom-select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+.custom-select:focus {
+  border-color: inherit;
+}
 
 
 /* NAVBAR */

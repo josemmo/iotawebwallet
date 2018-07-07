@@ -53,6 +53,11 @@ ob_start("compressHTML");
                 </a>
               </li>
               <li class="nav-item pt-5">
+                <a class="nav-link" href="#!/tools/">
+                  <?php readfile(__DIR__ . "/images/tools.svg"); ?> Tools
+                </a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="#!/settings/">
                   <?php readfile(__DIR__ . "/images/settings.svg"); ?> Settings
                 </a>
@@ -67,6 +72,7 @@ ob_start("compressHTML");
           <?php readfile(__DIR__ . "/app/components/page-send.html"); ?>
           <?php readfile(__DIR__ . "/app/components/page-receive.html"); ?>
           <?php readfile(__DIR__ . "/app/components/page-history.html"); ?>
+          <?php readfile(__DIR__ . "/app/components/page-tools.html"); ?>
           <?php readfile(__DIR__ . "/app/components/page-settings.html"); ?>
         </main>
       </div>
@@ -84,6 +90,7 @@ ob_start("compressHTML");
     <?php readfile(__DIR__ . "/app/components/modal-sending-transaction.html"); ?>
     <?php readfile(__DIR__ . "/app/components/modal-transaction-sent.html"); ?>
     <?php readfile(__DIR__ . "/app/components/modal-transaction-error.html"); ?>
+    <?php readfile(__DIR__ . "/app/components/modal-transaction-confirmed.html"); ?>
     <?php readfile(__DIR__ . "/app/components/modal-attaching.html"); ?>
     <?php readfile(__DIR__ . "/app/components/modal-attach-error.html"); ?>
 

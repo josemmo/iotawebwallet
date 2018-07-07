@@ -99,20 +99,4 @@
     window.location.reload();
   });
 
-
-  /* ON PAGE LOAD */
-  $page.on('pagination:load', function(e, section) {
-    $(this).find('[data-section]').removeClass('swatch-700');
-    if (typeof section !== 'undefined') {
-      var $section = $(this).find('[data-section="' + section + '"]');
-      $section.addClass('swatch-700');
-      setTimeout(function() {
-        $section.removeClass('swatch-700');
-      }, 300);
-      $('html, body').animate({
-        scrollTop: $section.offset().top - 100
-      }, 300);
-    }
-  });
-
 })();

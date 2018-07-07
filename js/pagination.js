@@ -37,7 +37,23 @@ $(function() {
     }
 
     // Trigger load event
-    $nextPage.trigger('pagination:load', localPath.slice(1));
+    var params = localPath.slice(1);
+    $nextPage.trigger('pagination:load', params);
+
+    // Focus page section
+    $nextPage.find('[data-section]').removeClass('swatch-700');
+    if (params.length > 0) {
+      var $section = $nextPage.find('[data-section="' + params[0] + '"]');
+      if ($section.length > 0) {
+        $section.addClass('swatch-700');
+        setTimeout(function() {
+          $section.removeClass('swatch-700');
+        }, 300);
+        $('html, body').animate({
+          scrollTop: $section.offset().top - 100
+        }, 300);
+      }
+    }
   }
 
 

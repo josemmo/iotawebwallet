@@ -16,7 +16,8 @@ if ($type == "js") {
 		"js/page.settings.js",
 		"js/iotaController.js",
 		"js/walletManager.js",
-		"js/page.send.js"
+		"js/page.send.js",
+		"js/page.tools.js"
 	];
 } elseif ($type == "css") {
 	header("Content-Type: text/css; charset=utf-8");

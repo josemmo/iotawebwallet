@@ -9,6 +9,8 @@
     SENT: 1,
     RECEIVED: 2
   };
+  var DEPTH = 3;
+  var MIN_WEIGHT_MAGNITUDE = 14;
 
   var iota = null;
   var useFallbackNode = false;
@@ -44,9 +46,20 @@
    * @callback          callback Callback
    */
   window.sendTransaction = function(tx, callback) {
-    var depth = 3;
-    var minWeightMagnitude = 14;
-    iota.api.sendTransfer(SEED, depth, minWeightMagnitude, [tx], callback);
+    iota.api.sendTransfer(SEED, DEPTH, MIN_WEIGHT_MAGNITUDE, [tx], callback);
+  };
+
+
+  /**
+   * Confirm transaction
+   * @param    {string} transactionHash Transaction hash
+   * @callback          callback        Callback
+   */
+  window.confirmTransaction = function(transactionHash, callback) {
+    var iotaObj = iota || getNewIotaInstance();
+    if (iotaObj === null) return;
+
+    iotaObj.api.replayBundle(transactionHash, DEPTH, MIN_WEIGHT_MAGNITUDE, callback);
   };
 
 
@@ -112,6 +125,17 @@
 
 
   /**
+   * Get new IOTA instance
+   * @return {IOTA} IOTA instance
+   */
+  function getNewIotaInstance() {
+    var nodeURL = getNodeURL();
+    if (nodeURL.length == 0) return null;
+    return new IOTA({provider: nodeURL});
+  }
+
+
+  /**
    * Wallet die
    */
   function walletDie() {
@@ -146,13 +170,12 @@
     };
 
     // Get wallet data
-    var nodeURL = getNodeURL();
-    if (nodeURL.length == 0) {
+    iota = getNewIotaInstance();
+    if (iota === null) {
       enableControls();
       walletDie();
       return;
     }
-    iota = new IOTA({provider: nodeURL});
     iota.api.getAccountData(SEED, function(error, accountData) {
       if (error) {
         if (useFallbackNode) {
@@ -296,7 +319,8 @@
             statusHTML = '<h>C</h><img width="15" src="images/confirmed.svg" alt="✔️" title="Confirmed">';
             break;
           case TX_STATUS.PENDING:
-            statusHTML = '<h>P</h><img width="15" src="images/pending.svg" alt="💬" title="Pending">';
+            var confirmUrl = '#!/tools/confirm/' + tx.hash;
+            statusHTML = '<h>P</h><a href="' + confirmUrl + '"><img width="15" src="images/pending.svg" alt="💬" title="Pending"></a>';
             break;
           case TX_STATUS.REATTACHED:
             statusHTML = '<h>R</h><img width="15" src="images/reattached.svg" alt="🔁" title="Reattachment confirmed">';

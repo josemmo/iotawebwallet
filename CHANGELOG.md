@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.5 - 2018-07-07
+- Added auto nodes
+- Added reattach tool
+- Added trytes converter
+- Updated dependencies
+- Minor bugfixes
+
 ## 1.0.4 - 2018-06-29
 - Changed default IOTA nodes
 

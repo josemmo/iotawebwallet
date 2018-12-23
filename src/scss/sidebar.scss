@@ -1,0 +1,28 @@
+/* SIDEBAR */
+.sidebar {
+  position: fixed;
+  width: $sidebar-width;
+  height: 100%;
+  background: #222;
+
+  .nav-item {
+    svg {
+      display: block;
+      width: 24px;
+      height: 24px;
+      margin: 0 auto 3px auto;
+    }
+
+    .nav-link {
+      padding: 10px 0;
+      color: $color-primary;
+      font-size: 10px;
+      text-align: center;
+      transition: color 0.1s ease-in-out;
+
+      &.active, &:hover {
+        color: #fff;
+      }
+    }
+  }
+}

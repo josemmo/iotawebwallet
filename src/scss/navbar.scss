@@ -1,0 +1,108 @@
+body {
+  margin-top: $navbar-height;
+}
+
+
+/* NAVBAR */
+.navbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  background: $color-primary;
+  color: #fff;
+  overflow: hidden;
+  z-index: 1000;
+
+  .navbar-brand {
+    width: $sidebar-width;
+    height: $navbar-height;
+    background: rgba(0,0,0,0.3) url('../images/logo.svg') no-repeat center;
+    background-size: 60%;
+  }
+
+  .navbar-title {
+    margin: -3px 0 0 0;
+    font-size: 20px;
+    font-weight: 900;
+
+    small {
+      font-size: 0.6em;
+    }
+  }
+
+  .navbar-wallet-dropdown {
+    position: relative;
+    height: $navbar-height;
+    padding: 6px 30px 6px 8px;
+    border: none;
+    background: rgba(0,0,0,0);
+    color: inherit;
+    text-align: right;
+    text-decoration: none;
+    outline: none;
+    transition: background-color 0.1s ease-in-out, opacity 0.1s ease-in-out;
+    cursor: pointer;
+
+    &:after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 30px;
+      height: 100%;
+      background: url('../images/down-arrow.svg') no-repeat center;
+      background-size: 60%;
+    }
+
+    .title {
+      display: block;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+
+    .subtitle {
+      display: block;
+      margin-top: -5px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+  }
+
+  .navbar-refresh {
+    width: $navbar-height;
+    height: $navbar-height;
+    background: url('../images/refresh.svg') no-repeat center;
+    background-size: 40%;
+    transition: background-color 0.1s ease-in-out;
+    cursor: pointer;
+
+    &.loading {
+      cursor: default;
+      animation: spin 0.8s linear infinite;
+      transition: none; /* Prevent hover background from leaking */
+    }
+  }
+
+  /* DISABLED RULES */
+  .navbar-refresh:not(.loading):not(.disabled):hover,
+  .navbar-wallet-dropdown:not(.disabled):hover,
+  .navbar-wallet-dropdown:not(.disabled):focus {
+    background-color: rgba(0,0,0,0.2);
+  }
+
+  .navbar-wallet-dropdown.disabled, .navbar-refresh.disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+}
+
+/* SPIN ANIMATION */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

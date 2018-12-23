@@ -1,0 +1,9 @@
+/* RENDERER */
+.renderer {
+  margin-left: $sidebar-width;
+  overflow-x: hidden;
+
+  section {
+    display: none;
+  }
+}

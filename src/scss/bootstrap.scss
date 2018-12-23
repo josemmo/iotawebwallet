@@ -1,0 +1,5 @@
+$theme-colors: (primary: $color-primary, secondary: $color-secondary);
+$theme-color-interval: 8%;
+$font-family-sans-serif: 'Lato', sans-serif;
+
+@import "~bootstrap/scss/bootstrap"; // TODO: load only necessary modules

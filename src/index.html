@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+  <title>IOTA Web Wallet</title>
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand p-0">
+    <a class="navbar-brand" href="/"></a>
+    <h1 class="navbar-title d-none d-md-block">
+      iotawebwallet.com
+      <small>v<%= htmlWebpackPlugin.options.app_version %></small>
+    </h1>
+    <a class="navbar-wallet-dropdown ml-auto" tabindex="0">
+      <span class="title">Current Wallet</span>
+      <span class="subtitle"></span>
+    </a>
+    <a class="navbar-refresh"></a>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- SIDEBAR -->
+      <nav class="sidebar">
+        <ul class="nav flex-column">
+          <% ['Summary', 'Send', 'Receive', 'History', 'Tools', 'Settings'].forEach((name) => { %>
+            <li class="nav-item<%= (name == 'Tools') ? ' pt-5' : '' %>">
+              <a class="nav-link" href="#!/<%= name.toLowerCase() %>/">
+                <img inline src="src/images/<%= name.toLowerCase() %>.svg"> <%= name %>
+              </a>
+            </li>
+          <% }) %>
+        </ul>
+      </nav>
+
+      <!-- PAGE RENDERER -->
+      <main class="col px-0 py-3 renderer">
+        <!-- TODO -->
+      </main>
+    </div>
+  </div>
+
+  <!-- MODALS -->
+  <!-- TODO -->
+</body>
+</html>

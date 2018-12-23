@@ -1,9 +1,0 @@
-.form-group label {
-  text-transform: uppercase;
-  margin-bottom: 0.15rem;
-  font-size: 0.8rem;
-}
-
-.card {
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-}

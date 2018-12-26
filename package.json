@@ -10,8 +10,15 @@
     "start": "webpack-dev-server --mode=development"
   },
   "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-export-default-from": "^7.2.0",
+    "@babel/preset-env": "^7.2.3",
+    "@iota/core": "^1.0.0-beta.8",
+    "@iota/validators": "^1.0.0-beta.8",
+    "babel-loader": "^8.0.4",
     "base64-inline-loader": "^1.1.1",
     "bootstrap": "^4.2.1",
+    "crypto-js": "^3.1.9-1",
     "css-loader": "^1.0.1",
     "html-loader": "^0.5.5",
     "html-webpack-inline-svg-plugin": "^1.2.4",
@@ -24,7 +31,7 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.0.1",
-    "webpack": "^4.27.1",
+    "webpack": "^4.28.2",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10"
   },

@@ -1,5 +1,23 @@
+/* OVERWRITE CUSTOM BOOTSTRAP VARIABLES */
 $theme-colors: (primary: $color-primary, secondary: $color-secondary);
 $theme-color-interval: 8%;
 $font-family-sans-serif: 'Lato', sans-serif;
+$input-btn-focus-color: transparent;
+$input-focus-border-color: $color-primary;
+$input-border-color: $color-gray;
 
+
+/* LOAD BOOTSTRAP */
 @import "~bootstrap/scss/bootstrap"; // TODO: load only necessary modules
+
+
+/* CUSTOM THEME RULES */
+.form-group label {
+  text-transform: uppercase;
+  margin-bottom: 0.15rem;
+  font-size: 0.8rem;
+}
+
+.card {
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}

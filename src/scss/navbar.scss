@@ -106,3 +106,13 @@ body {
     transform: rotate(360deg);
   }
 }
+
+
+/* WALLET DROPDOWN */
+.popover.wallet-dropdown-popover {
+  border-radius: 0;
+
+  a {
+    cursor: pointer;
+  }
+}

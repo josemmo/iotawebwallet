@@ -28,7 +28,7 @@
         <ul class="nav flex-column">
           <% ['Summary', 'Send', 'Receive', 'History', 'Tools', 'Settings'].forEach((name) => { %>
             <li class="nav-item<%= (name == 'Tools') ? ' pt-5' : '' %>">
-              <a class="nav-link" href="#!/<%= name.toLowerCase() %>/">
+              <a class="nav-link" href="#!/<%= name.toLowerCase() %>">
                 <img inline src="src/images/<%= name.toLowerCase() %>.svg"> <%= name %>
               </a>
             </li>
@@ -44,6 +44,6 @@
   </div>
 
   <!-- MODALS -->
-  <!-- TODO -->
+  <%= require('html-loader!./components/modals/enter-password.html') %>
 </body>
 </html>

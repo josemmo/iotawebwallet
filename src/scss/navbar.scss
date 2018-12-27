@@ -127,6 +127,6 @@ body {
 
 
 /* WALLET DROPDOWN */
-.popover.wallet-dropdown-popover a {
+.popover.wallet-dropdown-popover a:not(.text-muted) {
   cursor: pointer;
 }

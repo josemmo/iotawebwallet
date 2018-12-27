@@ -31,7 +31,7 @@ let currentWallet = null
  * @param  {string}  seed Seed
  * @return {boolean}      Is valid
  */
-function isValidSeed(seed) {
+export function isValidSeed(seed) {
   return isTrytes(seed, 81)
 }
 
@@ -170,6 +170,7 @@ export function addWallet(name, seed, pass, isSessionOnly) {
 
   // Update current wallet index in case it has changed
   currentWallet = getWalletIndex(currentWalletData)
+  // TODO: update IOTA instance (in case of seed change or deletion)
   notifyUi()
 }
 
@@ -188,6 +189,7 @@ export function deleteWallet(index) {
 
   // Update current wallet index in case it has changed
   currentWallet = getWalletIndex(currentWalletData)
+  // TODO: update IOTA instance (in case of seed change or deletion)
   notifyUi()
 }
 
@@ -209,7 +211,27 @@ export function updateWallet(index, newName) {
   // Update current wallet index in case it has changed
   if (index === currentWallet) currentWalletData.name = newName
   currentWallet = getWalletIndex(currentWalletData)
+  // TODO: update IOTA instance (in case of seed change or deletion)
   notifyUi()
+}
+
+
+/**
+ * Check wallet with name already exists
+ * @param  {string} name Wallet name
+ * @return {boolean}     Exists
+ */
+export function walletExists(name) {
+  return (getWalletIndex(name) !== null)
+}
+
+
+/**
+ * Delete all wallets from browser storage
+ */
+export function clearWallets() {
+  localStorage.removeItem(LS_WALLETS_KEY)
+  sessionStorage.removeItem(LS_WALLETS_KEY)
 }
 
 

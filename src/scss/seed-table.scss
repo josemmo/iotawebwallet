@@ -1,0 +1,11 @@
+.seed-table {
+  width: 100%;
+  text-align: center;
+  font-family: monospace;
+  font-size: 1.3em;
+
+  tr:nth-child(even) td:nth-child(odd),
+  tr:nth-child(odd) td:nth-child(even) {
+    background-color: #dedede;
+  }
+}

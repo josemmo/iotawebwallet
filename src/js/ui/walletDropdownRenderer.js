@@ -64,7 +64,10 @@ function getDropdownContents() {
  */
 function requestChangeWallet(index) {
   // Try to decrypt with empty password
-  if (changeWallet(index, '')) return
+  if (changeWallet(index, '')) {
+    renderDropdownStatus()
+    return
+  }
 
   // Prompt user to unlock wallet
   const walletName = getWallets()[index].name

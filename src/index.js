@@ -21,3 +21,5 @@ import 'bootstrap' // TODO: load only necessary modules
 
 import './js/ui/pagination'
 import './js/ui/walletDropdownRenderer'
+import './js/ui/walletListRenderer'
+import './js/ui/settingsRenderer'

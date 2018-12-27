@@ -1,0 +1,23 @@
+<div class="modal modal-delete-wallet" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete wallet</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>You are about to delete <strong class="wallet-name"></strong> from this device.</p>
+        <div class="alert alert-secondary session-alert" role="alert">
+          This is a <strong>session only</strong> wallet, so it'll be deleted anyway after exiting the browser.
+        </div>
+        <p>This action is irreversible. Do you still want to continue?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">No, keep wallet</button>
+        <button type="button" class="btn btn-outline-danger btn-continue">Yes, delete wallet</button>
+      </div>
+    </div>
+  </div>
+</div>

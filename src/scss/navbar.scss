@@ -127,10 +127,6 @@ body {
 
 
 /* WALLET DROPDOWN */
-.popover.wallet-dropdown-popover {
-  border-radius: 0;
-
-  a {
-    cursor: pointer;
-  }
+.popover.wallet-dropdown-popover a {
+  cursor: pointer;
 }

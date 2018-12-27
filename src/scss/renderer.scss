@@ -16,6 +16,8 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+@import "./constants.scss";
+
 /* RENDERER */
 .renderer {
   margin-left: $sidebar-width;
@@ -23,5 +25,9 @@
 
   section {
     display: none;
+
+    [data-section].focused {
+      background-color: transparentize($color-primary, 0.8);
+    }
   }
 }

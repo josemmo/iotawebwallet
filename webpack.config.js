@@ -18,6 +18,7 @@
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlWebpackInlineSVGPlugin = require('html-webpack-inline-svg-plugin')
+const LicenseWebpackPlugin = require('license-webpack-plugin').LicenseWebpackPlugin
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
@@ -62,6 +63,9 @@ module.exports = {
     ]
   },
   plugins: [
+    new LicenseWebpackPlugin({
+      outputFilename: 'licenses.txt'
+    }),
     new MiniCssExtractPlugin({
       filename: '[name].min.css',
       chunkFilename: '[id].min.css'

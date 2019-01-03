@@ -17,6 +17,7 @@
  */
 
 import $ from 'jquery'
+import { attachBusyListener, loadWalletData } from './../iotaClient'
 import { getWallets, getCurrentWallet, changeWallet } from './../walletManager'
 
 const $dropdown = $('.navbar .navbar-wallet-dropdown')
@@ -72,11 +73,11 @@ function requestChangeWallet(index) {
   // Prompt user to unlock wallet
   const walletName = getWallets()[index].name
   const $modal = $('.modal-enter-password')
+  const $pass = $modal.find('input[name="passphrase"]')
   $modal.find('.wallet-name').text(walletName)
-  $modal.find('input[name="passphrase"]')
-    .data('index', index).val('')
-    .removeClass('is-invalid')
+  $pass.data('index', index).val('').removeClass('is-invalid')
   $modal.modal('show')
+  $pass.focus()
 }
 
 
@@ -113,6 +114,13 @@ $('body').on('click', '.wallet-dropdown-popover a[data-index]', function() {
   requestChangeWallet(index)
 }).on('refreshUi', $dropdown, function() {
   renderDropdownStatus()
+})
+$refreshBtn.click(function() {
+  if (!$(this).hasClass('loading')) loadWalletData()
+})
+attachBusyListener(function(isBusy) {
+  $dropdown.toggleClass('disabled', isBusy)
+  $refreshBtn.toggleClass('loading', isBusy)
 })
 
 // Attach password modal listeners

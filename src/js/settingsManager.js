@@ -16,10 +16,12 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import { createClient } from './iotaClient'
+
 const LS_SETTINGS_KEY = 'settings'
 const DEFAULT_NODES = {
   main: 'https://nodes.thetangle.org:443',
-  fallback: 'https://durian.iotasalad.org:14265'
+  fallback: 'https://pool.iota.dance:443'
 }
 
 let settingsLoaded = false
@@ -31,7 +33,7 @@ let settings = {
   time: 'H:mm',
   explorer: 'https://thetangle.org/',
   mainNode: null,
-  fallbackNode: null,
+  fallbackNode: null, // TODO: implement in IOTA client
   autoNodes: true
 }
 
@@ -94,6 +96,7 @@ export function setProperty(key, value) {
     saveSettings()
   }
   if (key == 'autoNodes') fillAutoNodes()
+  if (['autoNodes', 'mainNode', 'fallbackNode'].includes(key)) createClient()
 }
 
 

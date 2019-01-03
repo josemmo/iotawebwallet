@@ -33,6 +33,10 @@ $border-radius-sm: $border-radius;
 
 
 /* CUSTOM THEME RULES */
+body {
+  cursor: default;
+}
+
 .form-group label {
   text-transform: uppercase;
   margin-bottom: 0.15rem;
@@ -40,5 +44,6 @@ $border-radius-sm: $border-radius;
 }
 
 .card {
-  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  transition: background-color, opacity 0.2s ease-in-out,
+              color 0.2s ease-in-out;
 }

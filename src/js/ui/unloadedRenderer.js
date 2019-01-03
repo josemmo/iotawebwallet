@@ -16,23 +16,16 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-@import "./constants.scss";
+import $ from 'jquery'
+import { attachBusyListener } from './../iotaClient'
+import { refreshUi } from './pagination'
 
-/* RENDERER */
-.renderer {
-  margin-left: $sidebar-width;
-  overflow-x: hidden;
+const $page = $('section[data-page="unloaded"]')
 
-  section {
-    display: none;
 
-    [data-section].focused {
-      background-color: transparentize($color-primary, 0.8);
-    }
-
-    [data-section].disabled {
-      opacity: 0.5;
-      pointer-events: none;
-    }
-  }
-}
+/* ATTACH IOTA CLIENT LISTENER */
+attachBusyListener(function(isBusy) {
+  $page.find('.section-idle').toggleClass('d-none', isBusy)
+  $page.find('.section-busy').toggleClass('d-none', !isBusy)
+  refreshUi()
+})

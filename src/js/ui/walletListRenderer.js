@@ -17,6 +17,7 @@
  */
 
 import $ from 'jquery'
+import { attachBusyListener } from './../iotaClient'
 import {
   getWallets,
   walletExists,
@@ -194,6 +195,11 @@ $deleteWalletModal.find('.btn-continue').click(function() {
   $deleteWalletModal.modal('hide')
 })
 
+
+/* BUSY LISTENER */
+attachBusyListener(function(isBusy) {
+  $page.find('[data-section="wallets"]').toggleClass('disabled', isBusy)
+})
 
 
 /* INITIALIZE */

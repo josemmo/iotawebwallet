@@ -18,6 +18,7 @@
 
 import $ from 'jquery'
 import { getCurrentWallet } from './../walletManager'
+import { isBusy } from './../iotaClient'
 
 
 /**
@@ -40,9 +41,8 @@ function onPageChange() {
 
   // Block certain pages in case wallet is unloaded
   const blocklist = ['summary', 'send', 'receive', 'history']
-  if ((blocklist.indexOf(path[0]) > -1) && (getCurrentWallet() === null)) {
-    path[0] = 'unloaded'
-  }
+  const isUnloaded = (getCurrentWallet() === null) || isBusy()
+  if ((blocklist.indexOf(path[0]) > -1) && isUnloaded) path[0] = 'unloaded'
 
   // Switch renderer contents
   const $prevPage = $('.renderer section:visible')
@@ -70,6 +70,38 @@ function onPageChange() {
       }, 300)
     }
   }
+}
+
+
+/**
+ * Refresh UI
+ */
+export function refreshUi() {
+  onPageChange()
+}
+
+
+/**
+ * Show feedback
+ * @param {jQuery} $elem   Target element
+ * @param {object} options Options
+ */
+export function showFeedback($elem, options) {
+  const originalValues = {
+    content: $elem.html(),
+    classes: $elem.attr('class')
+  }
+
+  $elem.prop('disabled', true)
+  if (options.text) $elem.text(options.text)
+  if (options.addClass) $elem.addClass(options.addClass)
+  if (options.removeClass) $elem.removeClass(options.removeClass)
+
+  setTimeout(function() {
+    $elem.html(originalValues.content)
+      .attr('class', originalValues.classes)
+      .prop('disabled', false)
+  }, 2000)
 }
 
 

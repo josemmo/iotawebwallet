@@ -17,8 +17,10 @@
  */
 
 import $ from 'jquery'
+import { attachBusyListener } from './../iotaClient'
 import { getProperty, setProperty, clearSettings } from './../settingsManager'
 import { clearWallets } from './../walletManager'
+import { showFeedback } from './pagination'
 
 const $page = $('section[data-page="settings"]')
 const $nodes = $page.find('[data-section="nodes"]')
@@ -87,7 +89,10 @@ $page.find('[data-section="nodes"] .btn-save').click(function() {
 
   setProperty('mainNode', mainNode)
   setProperty('fallbackNode', fallbackNode)
-  window.location.reload()
+  showFeedback($(this), {text: 'Saved!'})
+})
+attachBusyListener(function(isBusy) {
+  $page.find('[data-section="nodes"]').toggleClass('disabled', isBusy)
 })
 
 $('.modal-delete-all-data .btn-continue').click(function() {

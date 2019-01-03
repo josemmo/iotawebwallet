@@ -19,6 +19,7 @@
 import $ from 'jquery'
 import CryptoJS from 'crypto-js'
 import { isTrytes } from '@iota/validators'
+import { setClientSeed } from './iotaClient'
 
 const LS_WALLETS_KEY = 'wallets'
 const $walletDropdown = $('.navbar .navbar-wallet-dropdown')
@@ -170,7 +171,6 @@ export function addWallet(name, seed, pass, isSessionOnly) {
 
   // Update current wallet index in case it has changed
   currentWallet = getWalletIndex(currentWalletData)
-  // TODO: update IOTA instance (in case of seed change or deletion)
   notifyUi()
 }
 
@@ -189,7 +189,7 @@ export function deleteWallet(index) {
 
   // Update current wallet index in case it has changed
   currentWallet = getWalletIndex(currentWalletData)
-  // TODO: update IOTA instance (in case of seed change or deletion)
+  if (currentWalletData.index === index) setClientSeed(null)
   notifyUi()
 }
 
@@ -207,11 +207,9 @@ export function updateWallet(index, newName) {
   wallets[index].name = newName
   saveWallets(wallets)
 
-
   // Update current wallet index in case it has changed
   if (index === currentWallet) currentWalletData.name = newName
   currentWallet = getWalletIndex(currentWalletData)
-  // TODO: update IOTA instance (in case of seed change or deletion)
   notifyUi()
 }
 
@@ -247,7 +245,7 @@ export function changeWallet(index, pass) {
   if (seed === null) return false
 
   currentWallet = index
-  // TODO: save an instance of IOTA with decrypted seed
+  setClientSeed(seed)
   return true
 }
 

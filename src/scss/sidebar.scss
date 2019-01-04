@@ -38,8 +38,11 @@
       text-align: center;
       transition: color 0.1s ease-in-out;
 
-      &.active, &:hover {
+      &.active {
         color: #fff;
+      }
+      &:hover:not(.active) {
+        color: lighten($color-primary, 20%);
       }
     }
   }

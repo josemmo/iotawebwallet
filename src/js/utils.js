@@ -16,19 +16,19 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import moment from 'moment'
+import dayjs from 'dayjs'
 import { getProperty } from './settingsManager'
 
 
 /**
  * Format date
- * @param  {number|moment} timestamp UNIX timestamp or Moment.js object
- * @return {string}                  Date string representation
+ * @param  {number|dayjs} timestamp UNIX timestamp or Day.js object
+ * @return {string}                 Date string representation
  */
 export function formatDate(timestamp) {
   const m = (typeof timestamp == 'object') ?
     timestamp :
-    moment.unix(timestamp/1000)
+    dayjs.unix(timestamp/1000)
   return m.format(getProperty('date') + ' ' + getProperty('time'))
 }
 

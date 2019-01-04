@@ -16,11 +16,51 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-@import "./constants.scss";
-@import "./bootstrap.scss";
-@import "./helpers.scss";
-@import "./navbar.scss";
-@import "./sidebar.scss";
-@import "./renderer.scss";
-@import "./seed-table.scss";
-@import "./history.scss";
+section[data-page="history"] {
+  .dataTables_scrollHeadInner {
+    width: auto !important;
+  }
+
+  .dataTables_wrapper .row {
+    margin-bottom: 1rem;
+  }
+
+  .dataTables_info {
+    font-size: 0.8em;
+  }
+
+  .dataTables_paginate .pagination {
+    justify-content: flex-end;
+  }
+
+  table {
+    width: 100% !important;
+    margin: 0;
+    min-width: 750px;
+    table-layout: fixed;
+    font-size: 0.8em;
+
+    th, td {
+      width: auto !important;
+      padding: 0.75rem 0.3rem;
+    }
+
+    td {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    tr > *:first-child, tr > *:nth-child(2) {
+      width: 4em !important;
+      text-align: center;
+    }
+    tr > *:last-child {
+      text-align: right;
+    }
+
+    h {
+      display: none;
+    }
+  }
+}

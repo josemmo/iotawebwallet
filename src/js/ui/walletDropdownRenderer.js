@@ -37,6 +37,7 @@ function getDropdownContents() {
   if (wallets.length > 0) {
     wallets.forEach((wallet, index) => {
       let $wallet = $('<a/>').addClass('list-group-item').text(wallet.name)
+      if (wallet.isSessionOnly) $wallet.addClass('session-only')
       if (isDisabled) {
         $wallet.addClass('text-muted')
       } else {

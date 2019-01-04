@@ -16,12 +16,20 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-@import "./constants.scss";
-@import "./bootstrap.scss";
-@import "./helpers.scss";
-@import "./navbar.scss";
-@import "./sidebar.scss";
-@import "./renderer.scss";
-@import "./seed-table.scss";
-@import "./history.scss";
-@import "./settings.scss";
+section[data-page="settings"], .wallet-dropdown-popover {
+  .session-only {
+    display: flex;
+    align-items: center;
+    color: $color-secondary !important;
+
+    &:after {
+      content: '';
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      margin-left: 5px;
+      background: url('../images/incognito.svg') no-repeat center;
+      background-size: cover;
+    }
+  }
+}

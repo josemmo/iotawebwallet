@@ -52,7 +52,7 @@ function renderWalletList() {
       let $colLeft = $('<div/>')
         .addClass('col align-self-center text-truncate wallet-name')
         .text(wallets[i].name)
-      if (wallets[i].isSessionOnly) $colLeft.addClass('text-muted')
+      if (wallets[i].isSessionOnly) $colLeft.addClass('session-only')
 
       // Render and append row
       let $wallet = $('<div />')

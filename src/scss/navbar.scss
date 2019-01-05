@@ -73,6 +73,10 @@ body {
       background-size: 60%;
     }
 
+    &.disabled {
+      pointer-events: none;
+    }
+
     .title {
       display: block;
       text-transform: uppercase;

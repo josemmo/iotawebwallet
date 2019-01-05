@@ -235,18 +235,30 @@ export function clearWallets() {
 
 /**
  * Change current wallet
- * @param  {number}  index Wallet index
- * @param  {string}  pass  Wallet passphrase
- * @return {boolean}       Success
+ * @param  {number|null} index Wallet index
+ * @param  {string}      pass  Wallet passphrase
+ * @return {boolean}           Success
  */
 export function changeWallet(index, pass) {
-  let wallets = getWallets()
-  let seed = decrypt(wallets[index].seed, pass)
-  if (seed === null) return false
+  let seed = null
+  if (index !== null) {
+    const wallets = getWallets()
+    seed = decrypt(wallets[index].seed, pass)
+    if (seed === null) return false
+  }
 
   currentWallet = index
   setClientSeed(seed)
   return true
+}
+
+
+/**
+ * Unload current wallet
+ */
+export function unloadWallet() {
+  changeWallet(null)
+  notifyUi()
 }
 
 

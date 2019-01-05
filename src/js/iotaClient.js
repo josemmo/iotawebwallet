@@ -19,6 +19,7 @@
 import '@babel/polyfill'
 import { composeAPI } from '@iota/core'
 import { getProperty } from './settingsManager'
+import { unloadWallet } from './walletManager'
 
 export const TX_STATUS = {
   CONFIRMED: Symbol('Confirmed'),
@@ -88,6 +89,8 @@ export function isBusy() {
  * Load wallet data
  */
 export function loadWalletData() {
+  if (seed === null) return
+
   setBusy(true)
   iota.getAccountData(seed, {security: 2})
   .then(data => parseAccountData(data))
@@ -95,7 +98,7 @@ export function loadWalletData() {
     for (let listener of accountDataListeners) listener(accountData)
   }).catch(err => {
     console.error('IOTA client error', err)
-    setClientSeed(null) // TODO: add proper fallback
+    unloadWallet()
   }).finally(function() {
     setBusy(false)
   })

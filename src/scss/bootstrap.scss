@@ -37,6 +37,16 @@ body {
   cursor: default;
 }
 
+.custom-select {
+  -ms-appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+
+  &:focus {
+    box-shadow: none;
+  }
+}
+
 .form-group label {
   text-transform: uppercase;
   margin-bottom: 0.15rem;

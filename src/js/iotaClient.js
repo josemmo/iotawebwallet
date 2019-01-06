@@ -30,6 +30,8 @@ export const TX_TYPE = {
   SENT: Symbol('Sent'),
   RECEIVED: Symbol('Received')
 }
+const depth = 3
+const minWeightMagnitude = 14
 
 let iota = null
 let seed = null
@@ -149,6 +151,37 @@ async function parseAccountData(data) {
 export function setClientSeed(s) {
   seed = s
   loadWalletData()
+}
+
+
+/**
+ * Find transactions
+ * @param  {object} filters Search filters
+ * @return {Promise}        Callback
+ */
+export function findTransactions(filters) {
+  return iota.findTransactionObjects(filters)
+}
+
+
+/**
+ * Get new address
+ * @param  {number} index Address index
+ * @return {Promise}      Callback
+ */
+export async function getNewAddress(index) {
+  return await iota.getNewAddress(seed, {index})
+}
+
+
+/**
+ * Send transfers
+ * @param  {object[]} transfers Array of transfers
+ * @return {Promise}            Callback
+ */
+export async function sendTransfers(transfers) {
+  const trytes = await iota.prepareTransfers(seed, transfers)
+  return iota.sendTrytes(trytes, depth, minWeightMagnitude)
 }
 
 

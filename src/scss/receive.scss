@@ -16,13 +16,31 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import './scss/main.scss'
-import 'bootstrap' // TODO: load only necessary modules
+section[data-page="receive"] {
+  .address-text {
+    word-break: break-all;
+    font-weight: 700;
+    font-size: 1.3em;
+    text-align: center;
+  }
 
-import './js/ui/pagination'
-import './js/ui/unloadedRenderer'
-import './js/ui/walletDropdownRenderer'
-import './js/ui/walletListRenderer'
-import './js/ui/receiveRenderer'
-import './js/ui/historyRenderer'
-import './js/ui/settingsRenderer'
+  table.table-receive {
+    width: 100%;
+    min-width: 100%;
+    table-layout: fixed;
+    border-spacing: 0;
+    border-collapse: collapse;
+    font-size: 0.8em;
+
+    td {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    tr > *:last-child {
+      width: 100px;
+      text-align: right;
+    }
+  }
+}

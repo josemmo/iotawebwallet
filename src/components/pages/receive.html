@@ -1,0 +1,35 @@
+<section data-page="receive">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5">
+        <!-- LATEST ADDRESS -->
+        <div class="card mb-3">
+          <div class="card-body">
+            <h3 class="card-title">Address #<span class="address-index"></span></h3>
+            <h6 class="card-subtitle mb-3 text-muted">Use this address to receive transactions in The Tangle</h6>
+            <p class="address-text"></p>
+            <div class="address-qr mx-5"></div>
+            <button type="button" class="btn btn-block mt-4 address-btn"></button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md">
+        <!-- LATEST TRANSACTIONS -->
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <h3 class="card-title">Latest transactions</h3>
+                <h6 class="card-subtitle mb-3 text-muted">Incoming transactions to this address</h6>
+              </div>
+              <div class="col-auto">
+                <button type="button" class="btn btn-primary refresh-btn">Refresh</button>
+              </div>
+            </div>
+            <div class="transactions-list"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

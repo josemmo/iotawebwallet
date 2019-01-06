@@ -17,6 +17,7 @@
  */
 
 import $ from 'jquery'
+import { isTag } from '@iota/validators'
 import { attachBusyListener } from './../iotaClient'
 import { getProperty, setProperty, clearSettings } from './../settingsManager'
 import { clearWallets } from './../walletManager'
@@ -36,6 +37,7 @@ function renderSettings() {
   $page.find('[name="date"]').val(getProperty('date'))
   $page.find('[name="time"]').val(getProperty('time'))
   $page.find('[name="currency"]').val(getProperty('currency'))
+  $page.find('[name="default_tag"]').val(getProperty('defaultTag'))
   toggleAutoNodes(getProperty('autoNodes'))
 }
 
@@ -93,6 +95,18 @@ $page.find('[data-section="nodes"] .btn-save').click(function() {
 })
 attachBusyListener(function(isBusy) {
   $page.find('[data-section="nodes"]').toggleClass('disabled', isBusy)
+})
+
+$page.find('[data-section="advanced"] .btn-save').click(function() {
+  const $defaultTag = $page.find('[name="default_tag"]')
+  const defaultTag = $defaultTag.val().trim()
+  if ((defaultTag.length > 0) && !isTag(defaultTag)) {
+    $defaultTag.addClass('is-invalid')
+    return
+  }
+
+  setProperty('defaultTag', defaultTag)
+  showFeedback($(this), {text: 'Saved!'})
 })
 
 $('.modal-delete-all-data .btn-continue').click(function() {

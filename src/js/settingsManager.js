@@ -32,6 +32,7 @@ let settings = {
   date: 'YYYY-MM-DD',
   time: 'H:mm',
   explorer: 'https://thetangle.org/',
+  defaultTag: 'IOTAWEBWALLETDOTCOM',
   mainNode: null,
   fallbackNode: null, // TODO: implement in IOTA client
   autoNodes: true
@@ -46,7 +47,9 @@ function loadSettings() {
   let data = localStorage.getItem(LS_SETTINGS_KEY)
   if (data !== null) {
     data = JSON.parse(data)
-    for (let key in settings) settings[key] = data[key]
+    for (let key in settings) {
+      if (typeof data[key] !== 'undefined') settings[key] = data[key]
+    }
   }
   fillAutoNodes()
 

@@ -56,9 +56,11 @@ section[data-page="history"] {
       width: 3em !important;
       text-align: center;
     }
-    tr > *:last-child {
-      padding-right: 0.75rem;
+    tr > *:last-child:not(:first-child) {
       text-align: right;
+    }
+    tr > td:last-child:not(:first-child) {
+      padding-right: 0.75rem;
     }
 
     h {

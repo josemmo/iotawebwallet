@@ -128,6 +128,6 @@ $page.find('.address-btn').click(function() {
 /* INITIALIZE */
 attachAccountDataListener(function(data) {
   latestAddress = data.latestAddress
-  latestIndex = data.addresses.length
+  latestIndex = data.addresses.length - 1
   renderReceivePage()
 })

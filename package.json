@@ -15,6 +15,7 @@
     "@babel/polyfill": "^7.2.5",
     "@babel/preset-env": "^7.2.3",
     "@iota/checksum": "^1.0.0-beta.8",
+    "@iota/converter": "^1.0.0-beta.8",
     "@iota/core": "^1.0.0-beta.8",
     "@iota/validators": "^1.0.0-beta.8",
     "babel-loader": "^8.0.4",

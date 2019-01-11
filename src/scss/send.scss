@@ -16,14 +16,16 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import './scss/main.scss'
-import 'bootstrap' // TODO: load only necessary modules
+section[data-page="send"] {
+  .input-group-btn select {
+    margin-left: -1px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 
-import './js/ui/pagination'
-import './js/ui/unloadedRenderer'
-import './js/ui/walletDropdownRenderer'
-import './js/ui/walletListRenderer'
-import './js/ui/sendRenderer'
-import './js/ui/receiveRenderer'
-import './js/ui/historyRenderer'
-import './js/ui/settingsRenderer'
+  textarea.form-control {
+    height: 5rem;
+    min-height: 5rem;
+    max-height: 20rem;
+  }
+}

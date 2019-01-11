@@ -38,6 +38,7 @@
 
       <!-- PAGE RENDERER -->
       <main class="col px-0 py-3 renderer">
+        <%= require('html-loader!./components/pages/send.html') %>
         <%= require('html-loader!./components/pages/receive.html') %>
         <%= require('html-loader!./components/pages/history.html') %>
         <%= require('html-loader!./components/pages/settings.html') %>
@@ -48,6 +49,9 @@
 
   <!-- MODALS -->
   <%= require('html-loader!./components/modals/enter-password.html') %>
+  <%= require('html-loader!./components/modals/sending-transaction.html') %>
+  <%= require('html-loader!./components/modals/transaction-sent.html') %>
+  <%= require('html-loader!./components/modals/transaction-error.html') %>
   <%= require('html-loader!./components/modals/attaching.html') %>
   <%= require('html-loader!./components/modals/attach-error.html') %>
   <%= require('html-loader!./components/modals/new-wallet.html') %>

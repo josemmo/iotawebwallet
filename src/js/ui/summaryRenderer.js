@@ -18,7 +18,7 @@
 
 import $ from 'jquery'
 import dayjs from 'dayjs'
-import Chart from 'chart.js'
+import Chartist from 'chartist'
 import { TX_STATUS, attachAccountDataListener } from './../iotaClient'
 import { getProperty } from './../settingsManager'
 import { formatIotas, formatPrice, formatDate } from './../utils'
@@ -72,62 +72,47 @@ function updateExchangeData() {
  */
 function renderChart() {
   const currency = getProperty('currency')
-  const $chart = $page.find('.price-chart-container').html('<canvas/>')
-  const chartCtx = $chart.find('canvas').get(0).getContext('2d')
-  const chartColor = $('.navbar').css('background-color')
-  const chartGradient = chartCtx.createLinearGradient(0, 0, 0, 150)
-  chartGradient.addColorStop(0, chartColor)
-  chartGradient.addColorStop(1, '#FFF')
+  const $chart = $page.find('.price-chart-container').empty()
 
   // Update wallet rate in secondary currency
   const rate = (totalConfirmed / 1000000) * chartPrice
   $page.find('.wallet-rate').html('&asymp; ' + formatPrice(rate, currency))
 
   // Render chart canvas
-  new Chart(chartCtx, {
-    type: 'line',
-    data: {
-      labels: chartLabels,
-      datasets: [{
-        data: chartData,
-        fill: 'start',
-        borderWidth: 3,
-        pointRadius: 0,
-        pointHitRadius: 16,
-        borderColor: chartColor,
-        pointBackgroundColor: chartColor,
-        backgroundColor: chartGradient
-      }]
+  const chart = new Chartist.Line($chart.get(0), {
+    labels: chartLabels,
+    series: [chartData]
+  }, {
+    showPoint: false,
+    showLine: true,
+    showArea: true,
+    fullWidth: true,
+    showLabel: false,
+    axisX: {
+      showGrid: false,
+      showLabel: false,
+      offset: 0
     },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      legend: {display: false},
-      tooltips: {
-        callbacks: {
-          title: function(tooltipItem, data) {
-            return formatDate(tooltipItem[0].xLabel)
-          },
-          label: function(tooltipItem, data) {
-            return formatPrice(tooltipItem.yLabel, currency)
-          }
+    axisY: {
+      showGrid: false,
+      showLabel: false,
+      offset: 0
+    },
+    chartPadding: 0
+  })
+
+  // Animate on load
+  chart.on('draw', function(data) {
+    if (data.type === 'line' || data.type === 'area') {
+      data.element.animate({
+        d: {
+          begin: 0,
+          dur: 800,
+          from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
+          to: data.path.clone().stringify(),
+          easing: Chartist.Svg.Easing.easeOutQuint
         }
-      },
-      hover: {
-        mode: 'nearest',
-        intersect: true
-      },
-      scales: {
-        xAxes: [{
-          display: false,
-          ticks: {source: 'labels'},
-          gridLines: {display: false}
-        }],
-        yAxes: [{
-          display: false,
-          gridLines: {display: false}
-        }]
-      }
+      })
     }
   })
 }

@@ -16,10 +16,19 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+@import "~chartist/dist/scss/chartist.scss";
+
  section[data-page="summary"] {
   .price-chart-container {
     position: relative;
     width: 100%;
+
+    .ct-line {
+      stroke: $color-primary;
+    }
+    .ct-area {
+      fill: $color-primary;
+    }
   }
 
   .addresses-container table {

@@ -116,4 +116,4 @@ $('body').on('submit', 'form', function(e) {
 
 
 /* INITIALIZE */
-onPageChange()
+$(document).ready(onPageChange)

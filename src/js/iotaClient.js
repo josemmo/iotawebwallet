@@ -185,5 +185,25 @@ export async function sendTransfers(transfers) {
 }
 
 
+/**
+ * Confirm transaction
+ * @param  {string}  hash Transaction hash
+ * @return {Promise}      Callback
+ */
+export async function confirmTransaction(hash) {
+  const promotable = await iota.isPromotable(hash)
+
+  // Get response
+  let bundle
+  if (promotable) {
+    bundle = await iota.promoteTransaction(hash, depth, minWeightMagnitude)
+  } else {
+    bundle = await iota.replayBundle(hash, depth, minWeightMagnitude)
+  }
+
+  return {promotable, bundle}
+}
+
+
 /* INITIALIZE */
 if (iota === null) createClient()

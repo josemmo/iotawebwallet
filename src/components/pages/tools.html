@@ -1,0 +1,43 @@
+<section data-page="tools">
+  <div class="container">
+    <div class="row">
+      <div class="col-md">
+        <!-- CONFIRM TRANSACTION -->
+        <div class="card mb-2" data-section="confirm">
+          <div class="card-body">
+            <h3 class="card-title">Confirm transaction</h3>
+            <h6 class="card-subtitle mb-3 text-muted">Replay pending transactions</h6>
+            <div class="alert alert-info">Your transaction is still pending? This tool will try to confirm it by <strong>promoting</strong> the transaction and <strong>reattaching</strong> its bundle.</div>
+            <form>
+              <div class="form-group">
+                <label>Transaction hash</label>
+                <input type="text" name="transaction" class="form-control" required>
+                <div class="invalid-feedback">The hash is not valid</div>
+              </div>
+            </form>
+            <button type="button" class="btn btn-outline-secondary btn-confirm-transaction">Confirm transaction</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md">
+        <!-- CONVERT TRYTES -->
+        <div class="card mb-2" data-section="convert-trytes">
+          <div class="card-body">
+            <h3 class="card-title">Convert trytes</h3>
+            <h6 class="card-subtitle mb-3 text-muted">Encode and decode between trytes and ASCII characters.</h6>
+            <form>
+              <div class="form-group">
+                <label>ASCII characters</label>
+                <textarea name="ascii" class="form-control"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Trytes representation</label>
+                <textarea name="trytes" class="form-control"></textarea>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

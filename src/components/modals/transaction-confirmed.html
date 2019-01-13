@@ -1,0 +1,24 @@
+<div class="modal modal-transaction-confirmed" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Transaction confirmed</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="text-center">
+          <span class="promoted-msg d-none">The transaction was successfully promoted.</span>
+          <span class="reattached-msg d-none">The bundle containing that transaction has been successfully reattached.</span>
+          Here's its hash in case you need it:
+        </p>
+        <input type="text" class="form-control input-hash" readonly>
+      </div>
+      <div class="modal-footer">
+        <a href="#" target="_blank" class="btn btn-outline-secondary btn-view">View bundle</a>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>

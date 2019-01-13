@@ -1,6 +1,6 @@
 {
   "name": "iotawebwallet",
-  "version": "2.0.0-beta",
+  "version": "2.0.1-beta",
   "description": "An easy-to-use yet powerful web wallet for IOTA",
   "author": "José Miguel Moreno <josemmo@pm.me>",
   "repository": "https://github.com/josemmo/iotawebwallet",
@@ -18,7 +18,7 @@
     "@iota/converter": "^1.0.0-beta.8",
     "@iota/core": "^1.0.0-beta.8",
     "@iota/validators": "^1.0.0-beta.8",
-    "babel-loader": "^8.0.4",
+    "babel-loader": "^8.0.5",
     "base64-inline-loader": "^1.1.1",
     "bootstrap": "^4.2.1",
     "chartist": "^0.11.0",
@@ -31,7 +31,7 @@
     "html-webpack-inline-svg-plugin": "^1.2.4",
     "html-webpack-plugin": "^3.2.0",
     "jquery": "^3.3.1",
-    "license-webpack-plugin": "^2.0.4",
+    "license-webpack-plugin": "^2.1.0",
     "mini-css-extract-plugin": "^0.4.5",
     "node-sass": "^4.11.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
@@ -39,10 +39,10 @@
     "qrcode": "^1.3.2",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
-    "uglifyjs-webpack-plugin": "^2.0.1",
-    "webpack": "^4.28.2",
-    "webpack-cli": "^3.1.2",
-    "webpack-dev-server": "^3.1.10"
+    "uglifyjs-webpack-plugin": "^2.1.1",
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
   },
   "dependencies": {}
 }

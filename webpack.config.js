@@ -33,7 +33,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].min.js'
+    filename: '[name].[hash].js'
   },
   module: {
     rules: [
@@ -67,8 +67,8 @@ module.exports = {
       outputFilename: 'licenses.txt'
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].min.css',
-      chunkFilename: '[id].min.css'
+      filename: '[name].[hash].css',
+      chunkFilename: '[id].[hash].css'
     }),
     new HtmlWebpackPlugin({
       favicon: 'src/favicon.ico',

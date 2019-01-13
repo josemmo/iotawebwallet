@@ -1,0 +1,20 @@
+language: node_js
+node_js: "iojs"
+
+cache:
+  directories:
+    - node_modules
+
+script:
+  - npm run build
+
+deploy:
+  - provider: pages
+    skip-cleanup: true
+    github-token: $GH_TOKEN
+    local-dir: dist
+    on:
+      tags: true
+
+notifications:
+  email: false

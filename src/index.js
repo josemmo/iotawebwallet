@@ -17,7 +17,8 @@
  */
 
 import './scss/main.scss'
-import 'bootstrap' // TODO: load only necessary modules
+import 'bootstrap/js/dist/modal'
+import 'bootstrap/js/dist/popover'
 
 import './js/ui/pagination'
 import './js/ui/unloadedRenderer'

@@ -41,7 +41,7 @@ function getDropdownContents() {
       if (isDisabled) {
         $wallet.addClass('text-muted')
       } else {
-        $wallet.addClass('list-group-item-action').attr('data-index', index)
+        $wallet.addClass('list-group-item-action').attr('id', `wallet-${index}`)
       }
       $elem.append($wallet)
     })
@@ -110,8 +110,8 @@ $dropdown.popover({
 })
 
 // Attach dropdown listeners
-$('body').on('click', '.wallet-dropdown-popover a[data-index]', function() {
-  const index = $(this).data('index')
+$('body').on('mousedown', '.wallet-dropdown-popover a[id]', function() {
+  const index = Number($(this).attr('id').split('-')[1])
   requestChangeWallet(index)
 }).on('refreshUi', $dropdown, function() {
   renderDropdownStatus()

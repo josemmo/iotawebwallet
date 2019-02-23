@@ -112,6 +112,16 @@
                 <input type="text" name="default_tag" class="form-control">
                 <div class="invalid-feedback">Not a valid tag</div>
               </div>
+              <div class="form-group">
+                <label>Tangle Explorer</label>
+                <input type="url" name="explorer" list="explorers" class="form-control custom-select">
+                <datalist id="explorers">
+                  <option value="https://thetangle.org/">https://thetangle.org/</option>
+                  <option value="https://iotasear.ch/">https://iotasear.ch/</option>
+                  <option value="https://open-iota.prizziota.com/#/search/">https://open-iota.prizziota.com/#/search/</option>
+                </datalist>
+                <div class="invalid-feedback">Not a valid URL</div>
+              </div>
             </form>
             <button type="button" class="btn btn-outline-secondary btn-save">Save</button>
           </div>

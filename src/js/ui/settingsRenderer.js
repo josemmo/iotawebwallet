@@ -38,6 +38,7 @@ function renderSettings() {
   $page.find('[name="time"]').val(getProperty('time'))
   $page.find('[name="currency"]').val(getProperty('currency'))
   $page.find('[name="default_tag"]').val(getProperty('defaultTag'))
+  $page.find('[name="explorer"]').val(getProperty('explorer'))
   toggleAutoNodes(getProperty('autoNodes'))
 }
 
@@ -105,7 +106,15 @@ $page.find('[data-section="advanced"] .btn-save').click(function() {
     return
   }
 
+  const $explorer = $page.find('[name="explorer"]')
+  const explorer = $explorer.val().trim()
+  if (explorer.length == 0 || !$explorer.is(':valid')) {
+    $explorer.addClass('is-invalid')
+    return
+  }
+
   setProperty('defaultTag', defaultTag)
+  setProperty('explorer', explorer)
   showFeedback($(this), {text: 'Saved!'})
 })
 

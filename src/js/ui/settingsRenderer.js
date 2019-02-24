@@ -48,7 +48,7 @@ function renderSettings() {
  * @param {boolean} enabled Is mode enabled
  */
 function toggleAutoNodes(enabled) {
-  // Set auto-nodes status
+  // Set auto-nodes status and reload IOTA client
   setProperty('autoNodes', enabled)
 
   // Update node values

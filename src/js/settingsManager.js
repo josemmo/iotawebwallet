@@ -34,7 +34,7 @@ let settings = {
   explorer: 'https://thetangle.org/',
   defaultTag: 'IOTAWEBWALLETDOTCOM',
   mainNode: null,
-  fallbackNode: null, // TODO: implement in IOTA client
+  fallbackNode: null,
   autoNodes: true
 }
 

@@ -43,9 +43,21 @@ let accountDataListeners = []
 /**
  * Create IOTA client
  */
-export function createClient() {
+export function createClient(useFallback=false) {
   iota = composeAPI({
-    provider: getProperty('mainNode')
+    provider: getProperty(useFallback ? 'fallbackNode' : 'mainNode')
+  })
+
+  // Test provider
+  iota.getNodeInfo().then(function(info) {
+    console.log(`Provider version: ${info.appVersion}`)
+  }).catch(function() {
+    if (useFallback) {
+      console.error('Failed to connect to any IOTA provider')
+    } else {
+      console.warn('Failed to connect to main provider. Trying fallback...')
+      createClient(true)
+    }
   })
 }
 
@@ -203,7 +215,3 @@ export async function confirmTransaction(hash) {
 
   return {promotable, bundle}
 }
-
-
-/* INITIALIZE */
-if (iota === null) createClient()

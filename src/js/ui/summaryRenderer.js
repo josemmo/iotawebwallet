@@ -38,7 +38,7 @@ let chartData = []
 function updateExchangeData() {
   const currency = getProperty('currency')
   const chartUrl = 'https://min-api.cryptocompare.com/data/histohour' +
-    `?fsym=IOT&tsym=${currency}&limit=60&aggregate=3&e=CCCAGG`
+    `?fsym=MIOTA&tsym=${currency}&limit=60&aggregate=3&e=CCCAGG`
 
   $.get(chartUrl).done(function(res) {
     // Parse response

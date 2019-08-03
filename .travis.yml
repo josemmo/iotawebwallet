@@ -9,12 +9,13 @@ script:
   - npm run build
 
 deploy:
-  - provider: pages
-    skip-cleanup: true
-    github-token: $GH_TOKEN
-    local-dir: dist
-    on:
-      tags: true
+  provider: pages
+  skip-cleanup: true
+  github-token: $GH_TOKEN
+  local-dir: dist
+  fqdn: iotawebwallet.com
+  on:
+    tags: true
 
 notifications:
   email: false

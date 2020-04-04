@@ -21,8 +21,7 @@ const HtmlWebpackInlineSVGPlugin = require('html-webpack-inline-svg-plugin')
 const LicenseWebpackPlugin = require('license-webpack-plugin').LicenseWebpackPlugin
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const webpack = require('webpack')
+const TerserPlugin = require('terser-webpack-plugin')
 const path = require('path')
 
 const APP_VERSION = require('./package.json').version
@@ -78,17 +77,12 @@ module.exports = {
     }),
     new HtmlWebpackInlineSVGPlugin({
       runPreEmit: true
-    }),
-    // new webpack.DefinePlugin({
-    //   APP_VERSION
-    // })
+    })
   ],
   optimization: {
     minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: true
+      new TerserPlugin({
+        parallel: true
       }),
       new OptimizeCSSAssetsPlugin({})
     ]

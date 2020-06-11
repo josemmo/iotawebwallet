@@ -1,6 +1,6 @@
 {
   "name": "iotawebwallet",
-  "version": "2.0.5-beta",
+  "version": "2.0.6-beta",
   "description": "An easy-to-use yet powerful web wallet for IOTA",
   "author": "José Miguel Moreno <josemmo@pm.me>",
   "repository": "https://github.com/josemmo/iotawebwallet",

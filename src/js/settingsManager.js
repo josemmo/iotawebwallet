@@ -21,7 +21,7 @@ import { createClient } from './iotaClient'
 const LS_SETTINGS_KEY = 'settings'
 const DEFAULT_NODES = {
   main: 'https://nodes.thetangle.org:443',
-  fallback: 'https://ultranode.iotatoken.nl:443'
+  fallback: 'https://iota.chain.garden:443'
 }
 
 let settingsLoaded = false

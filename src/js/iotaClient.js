@@ -126,7 +126,7 @@ export function loadWalletData() {
  */
 async function parseAccountData(data) {
   const transactions = await iota.getTransactionObjects(data.transactions)
-  const states = await iota.getLatestInclusion(data.transactions)
+  const states = await iota.getInclusionStates(data.transactions)
 
   // Get confirmed bundles
   let confirmedBundles = []

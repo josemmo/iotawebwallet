@@ -1,6 +1,6 @@
 # IOTA Web Wallet
 [![Open Web App](https://img.shields.io/badge/open-webapp-04a997.svg)](https://iotawebwallet.com/)
-[![Travis CI](https://travis-ci.com/josemmo/iotawebwallet.svg?branch=master)](https://travis-ci.com/josemmo/iotawebwallet)
+[![Build Status](https://github.com/josemmo/iotawebwallet/workflows/Deploy/badge.svg)](https://github.com/josemmo/iotawebwallet/actions)
 [![License](https://img.shields.io/github/license/josemmo/iotawebwallet.svg)](COPYING)
 
 [IOTA Web Wallet](https://iotawebwallet.com/) is an Open Source and Free Software project that aims to provide a reliable and complete app for managing IOTA wallets directly from the web.

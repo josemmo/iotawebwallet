@@ -17,7 +17,29 @@
  */
 
 body {
-  margin-top: $navbar-height;
+  margin-top: $warning-height + $navbar-height;
+}
+
+/* TOP WARNING */
+.top-warning {
+  display: flex;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: $warning-height;
+  background: #d30543;
+  color: #fff;
+  text-align: center;
+  font-size: 0.8em;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+
+  a {
+    color: inherit;
+    font-weight: bold;
+  }
 }
 
 
@@ -26,7 +48,7 @@ body {
   position: fixed;
   left: 0;
   right: 0;
-  top: 0;
+  top: $warning-height;
   background: $color-primary;
   color: #fff;
   overflow: hidden;

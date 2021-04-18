@@ -65,7 +65,7 @@ function encrypt(payload, pass) {
  * @param  {string} pass      Passphrase
  * @return {string}           Decrypted text
  */
-function decrypt(encrypted, pass) {
+export function decrypt(encrypted, pass) {
   try {
     let res = CryptoJS.AES.decrypt(encrypted, pass).toString(CryptoJS.enc.Utf8)
     return isValidSeed(res) ? res : null

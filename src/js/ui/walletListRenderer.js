@@ -19,11 +19,11 @@
 import $ from 'jquery'
 import { attachBusyListener } from './../iotaClient'
 import {
+  decrypt,
   getWallets,
   walletExists,
   isValidSeed,
   addWallet,
-  editWallet,
   updateWallet,
   deleteWallet
 } from './../walletManager'
@@ -32,7 +32,9 @@ const $page = $('section[data-page="settings"]')
 const $newWalletModal = $('.modal-new-wallet')
 const $importWalletModal = $('.modal-import-wallet')
 const $editWalletModal = $('.modal-edit-wallet')
+const $exportWalletModal = $('.modal-export-wallet')
 const $deleteWalletModal = $('.modal-delete-wallet')
+const $viewSeedModal = $('.modal-view-seed')
 
 
 /**
@@ -42,6 +44,7 @@ function renderWalletList() {
   const wallets = getWallets()
   let colRight = '<div class="col-auto align-self-center">'
   colRight += '<button type="button" class="btn btn-outline-primary btn-sm mr-1 btn-edit-wallet">Edit</button>'
+  colRight += '<button type="button" class="btn btn-outline-secondary btn-sm mr-1 btn-export-wallet">Export</button>'
   colRight += '<button type="button" class="btn btn-outline-danger btn-sm btn-delete-wallet">Delete</button>'
   colRight += '</div>'
 
@@ -94,6 +97,17 @@ function regenerateSeedTable() {
   for (let i in numbers) seed += dict[numbers[i] % dict.length]
 
   // Generate table HTML
+  const tHTML = getSeedTableHTML(seed)
+  $newWalletModal.find('.seed-table').html(tHTML).data('seed', seed)
+}
+
+
+/**
+ * Get seed table HTML
+ * @param  {string} seed Decrypted seed
+ * @return {string}      Seed table HTML
+ */
+function getSeedTableHTML(seed) {
   let tHTML = ''
   const dim = 9
   for (let col=0; col<dim; col++) {
@@ -101,7 +115,19 @@ function regenerateSeedTable() {
     for (let row=0; row<dim; row++) tHTML += '<td>' + seed[col*dim+row] + '</td>'
     tHTML += '</tr>'
   }
-  $newWalletModal.find('.seed-table').html(tHTML).data('seed', seed)
+  return tHTML
+}
+
+
+/**
+ * Show seed dialog
+ * @param {string} seed Decrypted seed
+ */
+function showSeedDialog(seed) {
+  const tHTML = getSeedTableHTML(seed)
+  $viewSeedModal.find('.seed-table').html(tHTML)
+  $viewSeedModal.find('.seed-input').val(seed)
+  $viewSeedModal.modal('show')
 }
 
 
@@ -124,6 +150,9 @@ $newWalletModal.find('.btn-continue').click(function() {
   $newWalletModal.modal('hide')
   showImportWalletModal()
   $('.modal-import-wallet [name="seed"]').val(seed)
+})
+$newWalletModal.on('hidden.bs.modal', function() {
+  $newWalletModal.find('.seed-table').data('seed', '').html('')
 })
 
 $importWalletModal.find('.btn-import').click(function() {
@@ -154,6 +183,12 @@ $importWalletModal.find('.btn-import').click(function() {
    $importWalletModal.modal('hide')
   }
 })
+$importWalletModal.find('.btn-new-wallet').click(function(e) {
+  e.preventDefault()
+  regenerateSeedTable()
+  $importWalletModal.modal('hide')
+  $newWalletModal.modal('show')
+})
 
 
 /* EDIT AND DELETE WALLET LISTENERS */
@@ -164,6 +199,17 @@ $page.find('.wallet-list').on('click', '.btn-edit-wallet', function() {
     .val($row.find('.wallet-name').text())
     .data('index', $row.data('index'))
   $editWalletModal.modal('show')
+}).on('click', '.btn-export-wallet', function() {
+  const $row = $(this).closest('.row')
+  const wallet = getWallets()[$row.data('index')]
+  const seed = decrypt(wallet.seed, '')
+  if (seed === null) {
+    $exportWalletModal.find('.wallet-name').text($row.find('.wallet-name').text())
+    $exportWalletModal.data('index', $row.data('index'))
+    $exportWalletModal.modal('show')
+  } else {
+    showSeedDialog(seed)
+  }
 }).on('click', '.btn-delete-wallet', function() {
   const $row = $(this).closest('.row')
   $deleteWalletModal.find('.wallet-name')
@@ -189,10 +235,35 @@ $editWalletModal.find('.btn-continue').click(function() {
   $editWalletModal.modal('hide')
 })
 
+$exportWalletModal.find('.btn-continue').click(function() {
+  const $pass = $exportWalletModal.find('input[name="passphrase"]')
+  const index = $exportWalletModal.data('index')
+
+  // Try to decrypt seed
+  const wallet = getWallets()[index]
+  const seed = decrypt(wallet.seed, $pass.val())
+  if (seed === null) {
+    $pass.addClass('is-invalid')
+    return
+  }
+
+  // Show wallet seed
+  $exportWalletModal.modal('hide')
+  showSeedDialog(seed)
+})
+$exportWalletModal.on('hidden.bs.modal', function() {
+  $exportWalletModal.find('input[name="passphrase"]').val('')
+})
+
 $deleteWalletModal.find('.btn-continue').click(function() {
   deleteWallet($deleteWalletModal.find('.wallet-name').data('index'))
   renderWalletList()
   $deleteWalletModal.modal('hide')
+})
+
+$viewSeedModal.on('hidden.bs.modal', function() {
+  $viewSeedModal.find('.seed-table').html('')
+  $viewSeedModal.find('.seed-input').val('')
 })
 
 

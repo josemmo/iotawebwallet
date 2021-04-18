@@ -38,29 +38,29 @@
 
       <!-- PAGE RENDERER -->
       <main class="col px-0 py-3 renderer">
-        <%= require('html-loader!./components/pages/summary.html') %>
-        <%= require('html-loader!./components/pages/send.html') %>
-        <%= require('html-loader!./components/pages/receive.html') %>
-        <%= require('html-loader!./components/pages/history.html') %>
-        <%= require('html-loader!./components/pages/tools.html') %>
-        <%= require('html-loader!./components/pages/settings.html') %>
-        <%= require('html-loader!./components/pages/unloaded.html') %>
+        <%= require('html-loader!./components/pages/summary.html').default %>
+        <%= require('html-loader!./components/pages/send.html').default %>
+        <%= require('html-loader!./components/pages/receive.html').default %>
+        <%= require('html-loader!./components/pages/history.html').default %>
+        <%= require('html-loader!./components/pages/tools.html').default %>
+        <%= require('html-loader!./components/pages/settings.html').default %>
+        <%= require('html-loader!./components/pages/unloaded.html').default %>
       </main>
     </div>
   </div>
 
   <!-- MODALS -->
-  <%= require('html-loader!./components/modals/enter-password.html') %>
-  <%= require('html-loader!./components/modals/sending-transaction.html') %>
-  <%= require('html-loader!./components/modals/transaction-sent.html') %>
-  <%= require('html-loader!./components/modals/transaction-confirmed.html') %>
-  <%= require('html-loader!./components/modals/transaction-error.html') %>
-  <%= require('html-loader!./components/modals/attaching.html') %>
-  <%= require('html-loader!./components/modals/attach-error.html') %>
-  <%= require('html-loader!./components/modals/new-wallet.html') %>
-  <%= require('html-loader!./components/modals/import-wallet.html') %>
-  <%= require('html-loader!./components/modals/edit-wallet.html') %>
-  <%= require('html-loader!./components/modals/delete-wallet.html') %>
-  <%= require('html-loader!./components/modals/delete-all-data.html') %>
+  <%= require('html-loader!./components/modals/enter-password.html').default %>
+  <%= require('html-loader!./components/modals/sending-transaction.html').default %>
+  <%= require('html-loader!./components/modals/transaction-sent.html').default %>
+  <%= require('html-loader!./components/modals/transaction-confirmed.html').default %>
+  <%= require('html-loader!./components/modals/transaction-error.html').default %>
+  <%= require('html-loader!./components/modals/attaching.html').default %>
+  <%= require('html-loader!./components/modals/attach-error.html').default %>
+  <%= require('html-loader!./components/modals/new-wallet.html').default %>
+  <%= require('html-loader!./components/modals/import-wallet.html').default %>
+  <%= require('html-loader!./components/modals/edit-wallet.html').default %>
+  <%= require('html-loader!./components/modals/delete-wallet.html').default %>
+  <%= require('html-loader!./components/modals/delete-all-data.html').default %>
 </body>
 </html>

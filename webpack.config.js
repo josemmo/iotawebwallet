@@ -20,7 +20,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HtmlWebpackInlineSVGPlugin = require('html-webpack-inline-svg-plugin')
 const LicenseWebpackPlugin = require('license-webpack-plugin').LicenseWebpackPlugin
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const path = require('path')
 
@@ -32,13 +31,18 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[hash].js'
+    filename: '[name].[chunkhash].js'
+  },
+  resolve: {
+    fallback: {
+      crypto: false
+    }
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -57,17 +61,18 @@ module.exports = {
       },
       {
         test: /\.(svg|png|jpg|gif)$/,
-        use: ['base64-inline-loader?limit=1000&name=[name].[ext]']
+        use: ['url-loader']
       }
     ]
   },
   plugins: [
     new LicenseWebpackPlugin({
-      outputFilename: 'licenses.txt'
+      outputFilename: 'licenses.txt',
+      perChunkOutput: false
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].[hash].css',
-      chunkFilename: '[id].[hash].css'
+      filename: '[name].[chunkhash].css',
+      chunkFilename: '[id].[chunkhash].css'
     }),
     new HtmlWebpackPlugin({
       favicon: 'src/favicon.ico',
@@ -83,8 +88,7 @@ module.exports = {
     minimizer: [
       new TerserPlugin({
         parallel: true
-      }),
-      new OptimizeCSSAssetsPlugin({})
+      })
     ]
   }
 }

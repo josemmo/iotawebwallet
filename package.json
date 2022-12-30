@@ -19,7 +19,7 @@
     "@iota/converter": "^1.0.0-beta.30",
     "@iota/core": "^1.0.0-beta.30",
     "@iota/validators": "^1.0.0-beta.30",
-    "babel-loader": "^8.2.2",
+    "babel-loader": "^8.3.0",
     "bootstrap": "^4.5.2",
     "chartist": "^0.11.4",
     "crypto-browserify": "^3.12.0",
